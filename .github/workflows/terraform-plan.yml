@@ -25,4 +25,4 @@ jobs:
         run: terraform -chdir=env/dev init
 
       - name: Terraform Plan
-        run: terraform -chdir=env/dev plan -lock=false 
+        run: terraform -chdir=env/dev plan -lock=false --input=false
