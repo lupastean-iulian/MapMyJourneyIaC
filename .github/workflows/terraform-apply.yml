@@ -28,9 +28,6 @@ jobs:
 
       - name: Terraform Plan
         run: terraform -chdir=env/dev plan
-
-      - name: Terraform Apply
-        run: terraform -chdir=env/dev apply -auto-approve
         env: 
           TF_VAR_resource_group_name: ${{ secrets.ARM_RESOURCE_GROUP_NAME }}
           TF_VAR_location: ${{ secrets.ARM_LOCATION }}
@@ -41,3 +38,5 @@ jobs:
           TF_VAR_sql_database_name: ${{ secrets.ARM_SQL_DATABASE_NAME }}
           TF_VAR_sql_admin_username: ${{ secrets.ARM_SQL_ADMIN_NAME }}
           TF_VAR_sql_admin_password: ${{ secrets.ARM_SQL_ADMIN_PASSWORD }}
+      - name: Terraform Apply
+        run: terraform -chdir=env/dev apply -auto-approve
