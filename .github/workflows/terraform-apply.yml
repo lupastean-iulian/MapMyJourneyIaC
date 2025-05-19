@@ -1,0 +1,33 @@
+name: 'Terraform Apply (main)'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'env/dev/**'
+      - '.github/workflows/terraform-apply.yml'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Terraform Init
+        run: terraform -chdir=env/dev init
+
+      - name: Terraform Plan
+        run: terraform -chdir=env/dev plan
+
+      - name: Terraform Apply
+        run: terraform -chdir=env/dev apply -auto-approve
