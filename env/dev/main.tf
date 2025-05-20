@@ -36,7 +36,7 @@ resource "azurerm_service_plan" "main" {
 resource "azurerm_static_web_app" "frontend" {
   name                = var.frontend_web_app_name
   resource_group_name = azurerm_resource_group.main.name
-  location            = "Global"
+  location            = "westeurope"
   sku_tier = "Free"
 }
 
