@@ -60,6 +60,8 @@ resource "azurerm_mssql_server" "main" {
   location                     = azurerm_resource_group.main.location
   administrator_login          = var.sql_admin_username
   administrator_login_password = var.sql_admin_password
+  version                      = "12.0"
+  minimum_tls_version          = "1.2"
 }
 
 resource "azurerm_mssql_database" "main" {
