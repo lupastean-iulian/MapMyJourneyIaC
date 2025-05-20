@@ -65,10 +65,10 @@ resource "azurerm_mssql_server" "main" {
 }
 
 resource "azurerm_mssql_database" "main" {
-  name           = var.sql_database_name
-  server_id      = azurerm_mssql_server.main.id
-  sku_name       = "GP_Gen5_2"
-  max_size_gb    = 5
+  name            = var.sql_database_name
+  server_id       = azurerm_mssql_server.main.id
+  sku_name        = "GP_S_Gen5_2"
+  max_size_gb     = 5
   zone_redundant  = false
-  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  collation       = "SQL_Latin1_General_CP1_CI_AS"
 }
