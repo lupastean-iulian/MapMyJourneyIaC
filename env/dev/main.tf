@@ -43,8 +43,8 @@ resource "azurerm_static_web_app" "frontend" {
 resource "azurerm_linux_web_app" "backend" {
   name                = var.backend_web_app_name
   resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
-  service_plan_id      = azurerm_service_plan.main.id
+  location            = "Global"
+  service_plan_id     = azurerm_service_plan.main.id
 
   site_config {
     websockets_enabled = true
