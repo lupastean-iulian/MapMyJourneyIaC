@@ -36,16 +36,16 @@ resource "azurerm_service_plan" "main" {
 resource "azurerm_static_web_app" "frontend" {
   name                = var.frontend_web_app_name
   resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  location            = "Global"
   sku_tier = "Free"
 }
 
 resource "azurerm_linux_web_app" "backend" {
   name                = var.backend_web_app_name
   resource_group_name = azurerm_resource_group.main.name
-  location            = "Global"
+  location            = azurerm_resource_group.main.location
   service_plan_id     = azurerm_service_plan.main.id
-
+  always_on          = false
   site_config {
     websockets_enabled = true
     application_stack {
@@ -69,6 +69,5 @@ resource "azurerm_mssql_database" "main" {
   server_id      = azurerm_mssql_server.main.id
   sku_name       = "GP_S_Gen5_2"
   max_size_gb    = 5
-  zone_redundant = true
   collation      = "SQL_Latin1_General_CP1_CI_AS"
 }
