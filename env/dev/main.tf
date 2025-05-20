@@ -27,24 +27,24 @@ resource "azurerm_resource_group" "main" {
 
 resource "azurerm_service_plan" "main" {
   name                = var.app_service_plan_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
   os_type = "Linux"
   sku_name = "F1"
 }
 
 resource "azurerm_static_web_app" "frontend" {
   name                = var.frontend_web_app_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
   sku_tier = "Free"
 }
 
 resource "azurerm_linux_web_app" "backend" {
   name                = var.backend_web_app_name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  service_plan_id     = azurerm_service_plan.main.id
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  service_plan_id      = azurerm_service_plan.main.id
 
   site_config {
     websockets_enabled = true
@@ -56,8 +56,8 @@ resource "azurerm_linux_web_app" "backend" {
 
 resource "azurerm_mssql_server" "main" {
   name                         = var.sql_server_name
-  resource_group_name          = var.resource_group_name
-  location                     = var.location
+  resource_group_name          = azurerm_resource_group.main.name
+  location                     = azurerm_resource_group.main.location
   version                      = "12.0"
   administrator_login          = var.sql_admin_username
   administrator_login_password = var.sql_admin_password
