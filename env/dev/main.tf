@@ -74,4 +74,5 @@ resource "azurerm_mssql_database" "main" {
   geo_backup_enabled = false
   storage_account_type = "Local"
   min_capacity = 0.5
+  auto_pause_delay_in_minutes = 60
 }
