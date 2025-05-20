@@ -73,4 +73,5 @@ resource "azurerm_mssql_database" "main" {
   collation       = "SQL_Latin1_General_CP1_CI_AS"
   geo_backup_enabled = false
   storage_account_type = "Local"
+  min_capacity = 0.5
 }
