@@ -69,4 +69,5 @@ resource "azurerm_mssql_database" "main" {
   max_size_gb     = 5
   zone_redundant  = false
   collation       = "SQL_Latin1_General_CP1_CI_AS"
+  geo_backup_enabled = false
 }
