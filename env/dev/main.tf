@@ -69,7 +69,5 @@ resource "azurerm_mssql_database" "main" {
   server_id       = azurerm_mssql_server.main.id
   sku_name        = "GP_S_Gen5_2"
   max_size_gb     = 5
-  zone_redundant  = false
   collation       = "SQL_Latin1_General_CP1_CI_AS"
-  geo_backup_enabled = false
 }
